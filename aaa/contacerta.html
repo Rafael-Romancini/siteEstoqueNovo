@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="style.css">
+
+      <title>Document</title>
+  </head>
+  <body>
+    <table>
+      <input class="input" id="campo1" type="number" />
+      <input id='add' type='button' onclick='insert1(this.value);'  value='1' > 
+      <input id='add' type='button' onclick='insert1(this.value);'  value='-1'> 
+      <td><button class="botao" onclick="clean1()">Limpar</button></td>
+          
+      <input class="input" id="campo2" type="number" />
+      <input id='add' type='button' onclick='insert2(this.value);'  value='1' > 
+      <input id='add' type='button' onclick='insert2(this.value);'  value='-1'>
+      <td><button class="botao" onclick="clean2()">Limpar</button></td>
+
+      <input class="input" id="campo3" type="number" />
+      <input id='add' type='button' onclick='insert3(this.value);'  value='1' > 
+      <input id='add' type='button' onclick='insert3(this.value);'  value='-1'>
+      <td><button class="botao" onclick="clean3()">Limpar</button></td>
+
+      <input class="input" id="campo4" type="number" />
+      <input id='add' type='button' onclick='insert4(this.value);'  value='1' > 
+      <input id='add' type='button' onclick='insert4(this.value);'  value='-1'>
+      <td><button class="botao" onclick="clean4()">Limpar</button></td>
+
+      <span id="resultado"></span>
+      <span id="duvida"> </span>
+      <span id = "teste"></span>
+      <td><button class="botao" onclick="clean()">Limpar Tudo</button></td>
+    </table>
+  </body>
+  
+  <script>
+    var cofre = 80;
+    var conteiner = 90;
+    var palete = 100;
+    var paleteChamex = 110; 
+    var estendido24 = 1240;
+    var estendido26 = 1300;
+    var toco36 = 1500;
+    var Truco42 = 1740;
+    var alongado50 = 2100;
+    var carreta72 = 2760;
+    var carreta74 = 2960;
+    var carreta76 = 3020;
+
+    var campo1 = document.getElementById("campo1");
+    var campo2 = document.getElementById("campo2");
+    var campo3 = document.getElementById("campo3");
+    var campo4 = document.getElementById("campo4");
+    var resultado = document.getElementById("resultado");
+    var somenteNumeros = new RegExp("[^0-9]", "g");
+
+    var toNumber = function (value) {
+      var number = value.replace(somenteNumeros, "");    
+      number = parseInt(number);    
+      if (isNaN(number)) 
+        number = 0;
+      return number;
+    }
+
+    var somenteNumeros = function (event) {
+      event.target.value = toNumber(event.target.value);
+    }
+
+    var onInput = function (event) {
+      var num1 = toNumber(campo1.value);
+      var num2 = toNumber(campo2.value);
+      var num3 = toNumber(campo3.value);
+      var num4 = toNumber(campo4.value);
+      var calcInicial = num1 * cofre + num2 * conteiner + num3 * palete + num4 * paleteChamex;
+      var calc = (estendido24 - calcInicial)/100;
+      if(calc > 0){
+        resultado.textContent = eval(calc);
+        duvida.textContent = "Da certo"
+      }
+      else if(calc ==0){
+        resultado.textContent = eval(calc);
+        duvida.textContent = "Da certo"
+      }
+      else{
+        resultado.textContent = eval(calc);
+        duvida.textContent = "não da certo"
+      }
+    }
+    function insert1(val){
+      result = document.getElementById('campo1');
+      result.value = result.value? parseInt(result.value) + parseInt(val) : parseInt(val);  
+      var num1 = toNumber(campo1.value);
+      var num2 = toNumber(campo2.value);
+      var num3 = toNumber(campo3.value);
+      var num4 = toNumber(campo4.value);
+      var calcInicial = num1 * cofre + num2 * conteiner + num3 * palete + num4 * paleteChamex;
+      var calc = (estendido24 - calcInicial)/100;
+      if(calc>0){
+        resultado.textContent = eval(calc);
+        duvida.textContent = "Da certo"
+      }
+      else{
+        resultado.textContent = eval(calc);
+        duvida.textContent = "não da certo"
+      }
+    }
+    function insert2(val){
+      result = document.getElementById('campo2');
+      result.value = result.value? parseInt(result.value) + parseInt(val) : parseInt(val);  
+      var num1 = toNumber(campo1.value);
+      var num2 = toNumber(campo2.value);
+      var num3 = toNumber(campo3.value);
+      var num4 = toNumber(campo4.value);
+      var calcInicial = num1 * cofre + num2 * conteiner + num3 * palete + num4 * paleteChamex;
+      var calc = (estendido24 - calcInicial)/100;
+      if(calc>0){
+        resultado.textContent = eval(calc);
+        duvida.textContent = "Da certo"
+      }
+      else{
+        resultado.textContent = eval(calc);
+        duvida.textContent = "não da certo"
+      }
+    }
+    function insert3(val){
+      result = document.getElementById('campo3');
+      result.value = result.value? parseInt(result.value) + parseInt(val) : parseInt(val);  
+      var num1 = toNumber(campo1.value);
+      var num2 = toNumber(campo2.value);
+      var num3 = toNumber(campo3.value);
+      var num4 = toNumber(campo4.value);
+      var calcInicial = num1 * cofre + num2 * conteiner + num3 * palete + num4 * paleteChamex;
+      var calc = (estendido24 - calcInicial)/100;
+      if(calc>0){
+        resultado.textContent = eval(calc);
+        duvida.textContent = "Da certo"
+      }
+      else{
+        resultado.textContent = eval(calc);
+        duvida.textContent = "não da certo"
+      }
+    }
+    function insert4(val){
+      result = document.getElementById('campo4');
+      result.value = result.value? parseInt(result.value) + parseInt(val) : parseInt(val);  
+      var num1 = toNumber(campo1.value);
+      var num2 = toNumber(campo2.value);
+      var num3 = toNumber(campo3.value);
+      var num4 = toNumber(campo4.value);
+      var calcInicial = num1 * cofre + num2 * conteiner + num3 * palete + num4 * paleteChamex;
+      var calc = (estendido24 - calcInicial)/100;
+      if(calc>0){
+        resultado.textContent = eval(calc);
+        duvida.textContent = "Da certo"
+      }
+      else{
+        resultado.textContent = eval(calc);
+        duvida.textContent = "não da certo"
+      }
+    }     
+    
+    function clean()
+        {
+            document.getElementById('campo1').value = 0;
+            document.getElementById('campo2').value = 0;
+            document.getElementById('campo3').value = 0;
+            document.getElementById('campo4').value = 0;
+            resultado.textContent = estendido24/100;
+            duvida.textContent = "Da certo";
+        }
+    function clean1()
+        {   
+          document.getElementById('campo1').value = 0;
+          var num1 = toNumber(campo1.value);
+          var num2 = toNumber(campo2.value);
+          var num3 = toNumber(campo3.value);
+          var num4 = toNumber(campo4.value);
+          var calcInicial = num1 * cofre + num2 * conteiner + num3 * palete + num4 * paleteChamex;
+          var calc = (estendido24 - calcInicial)/100;
+          if(calc>0){
+            resultado.textContent = eval(calc);
+            duvida.textContent = "Da certo"
+          }
+          else{
+            resultado.textContent = eval(calc);
+            duvida.textContent = "não da certo"
+          }
+        }
+    function clean2()
+        {
+            document.getElementById('campo2').value = 0;
+          var num1 = toNumber(campo1.value);
+          var num2 = toNumber(campo2.value);
+          var num3 = toNumber(campo3.value);
+          var num4 = toNumber(campo4.value);
+          var calcInicial = num1 * cofre + num2 * conteiner + num3 * palete + num4 * paleteChamex;
+          var calc = (estendido24 - calcInicial)/100;
+          if(calc>0){
+            resultado.textContent = eval(calc);
+            duvida.textContent = "Da certo"
+          }
+          else{
+            resultado.textContent = eval(calc);
+            duvida.textContent = "não da certo"
+          }
+            
+        }
+    function clean3()
+        {
+            document.getElementById('campo3').value = 0;
+          var num1 = toNumber(campo1.value);
+          var num2 = toNumber(campo2.value);
+          var num3 = toNumber(campo3.value);
+          var num4 = toNumber(campo4.value);
+          var calcInicial = num1 * cofre + num2 * conteiner + num3 * palete + num4 * paleteChamex;
+          var calc = (estendido24 - calcInicial)/100;
+          if(calc>0){
+            resultado.textContent = eval(calc);
+            duvida.textContent = "Da certo"
+          }
+          else{
+            resultado.textContent = eval(calc);
+            duvida.textContent = "não da certo"
+          }
+        }
+    function clean4()
+        {
+            document.getElementById('campo4').value = 0;
+          var num1 = toNumber(campo1.value);
+          var num2 = toNumber(campo2.value);
+          var num3 = toNumber(campo3.value);
+          var num4 = toNumber(campo4.value);
+          var calcInicial = num1 * cofre + num2 * conteiner + num3 * palete + num4 * paleteChamex;
+          var calc = (estendido24 - calcInicial)/100;
+          if(calc>0){
+            resultado.textContent = eval(calc);
+            duvida.textContent = "Da certo"
+          }
+          else{
+            resultado.textContent = eval(calc);
+            duvida.textContent = "não da certo"
+          }
+        }    
+
+    campo1.addEventListener("input", somenteNumeros);
+    campo2.addEventListener("input", somenteNumeros);
+    campo3.addEventListener("input", somenteNumeros);
+    campo4.addEventListener("input", somenteNumeros);
+
+    campo1.addEventListener("input", onInput);
+    campo2.addEventListener("input", onInput);
+    campo3.addEventListener("input", onInput);
+    campo4.addEventListener("input", onInput);
+    operador.addEventListener("input", onInput);
+
+    onInput();
+  </script>
+</html>
