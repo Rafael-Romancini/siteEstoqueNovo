@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="certo.css">
+
+    <title>Document</title>
+
+</head>
+  <body>
+    <table class="divInput">
+        <div class="operacao"> 
+            <p class="operacaoP">Conteiner</p>
+            <input id='add somaConteiner' class="operacaoButton" type='button' onclick='insert1(this.value);'  value='1' >
+            <input class="input operacaoText" id="campo1" type="number" />   
+            <input id='add somaConteiner' class="operacaoButton" type='button' onclick='insert1(this.value);'  value='-1'> 
+            <td><button class="botao" onclick="clean1()">Limpar</button></td>
+        </div>  
+
+        <div class="operacao"> 
+            <p class="operacaoP">Cofre</p>
+            <input id='add somaConteiner' class="operacaoButton" type='button' onclick='insert2(this.value);'  value='1' > 
+            <input class="input operacaoText" id="campo2" type="number" />         
+            <input id='add somaConteiner' class="operacaoButton" type='button' onclick='insert2(this.value);'  value='-1'> 
+            <td><button class="botao" onclick="clean2()">Limpar</button></td>
+        </div> 
+
+        <div class="operacao"> 
+            <p class="operacaoP">Palete</p>
+            <input id='add somaConteiner' class="operacaoButton" type='button' onclick='insert3(this.value);'  value='1' > 
+            <input class="input operacaoText" id="campo3" type="number" />           
+            <input id='add somaConteiner' class="operacaoButton" type='button' onclick='insert3(this.value);'  value='-1'> 
+            <td><button class="botao" onclick="clean3()">Limpar</button></td>
+        </div> 
+
+        <div class="operacao"> 
+            <p class="operacaoP">PaleteChamex</p>
+            <input id='add somaConteiner' class="operacaoButton" type='button' onclick='insert4(this.value);'  value='1' > 
+            <input class="input operacaoText" id="campo4" type="number" />        
+            <input id='add somaConteiner' class="operacaoButton" type='button' onclick='insert4(this.value);'  value='-1'> 
+            <td><button class="botao" onclick="clean4()">Limpar</button></td>
+        </div>  
+
+      
+      <td><button class="botao" onclick="clean()">Limpar Tudo</button></td>
+    </table>
+    
+     
+
+    <table class="table">
+        <tr>
+            <th>Veiculos</th> <th>Metraegem</th> <th>Cubagem</th><th>Diferença</th>  <th>Status</th> <th>Total</th>
+        </tr>
+
+        <tr>
+            <td>Estendido(24)</td> <td>6,2</td> <td>12,4</td> <td> <span id="resultadoestendido24"></span> </td> <td><span id="duvida"> </span></td><td>#</td>
+        </tr>    
+    
+        <tr>
+            <td>Estendido(26)</td> <td>6,5</td> <td>13</td> <td> <span id="resultadoestendido26"></span> </td> <td><span id="duviafwfdawfda"> </span></td><td>#</td>
+        </tr>
+
+        <tr>
+            <td>Toco(36)</td> <td>7,5</td> <td>15</td> <td>#</td> <td>#</td><td>#</td>
+        </tr>
+
+        <tr>
+            <td>Truco(42)</td><td>8,7</td> <td>17,4</td> <td>#</td><td>#</td><td>#</td>
+        </tr>
+
+        <tr>
+            <td>Alongado(50)</td> <td>10,5</td> <td>21</td> <td>#</td> <td>#</td><td>#</td>
+        </tr>
+
+        <tr>
+            <td>Carreta1(72)</td> <td>13,8</td> <td>27,6</td> <td>#</td> <td>#</td><td>#</td>
+        </tr>
+
+        <tr>
+            <td>Carreta2(74)</td> <td>14,8</td> <td>29,6</td> <td>#</td> <td>#</td><td>#</td>
+        </tr>
+
+        <tr>
+            <td>Carreta3(76)</td> <td>15,1</td> <td>30,2</td> <td>#</td> <td>#</td><td>#</td>
+        </tr>
+        
+    </table>
+</body>
+  
+<script>
+  var cofre = 80;
+  var conteiner = 90;
+  var palete = 100;
+  var paleteChamex = 110; 
+  var estendido24 = 1240;
+  var estendido26 = 1300;
+  var toco36 = 1500;
+  var Truco42 = 1740;
+  var alongado50 = 2100;
+  var carreta72 = 2760;
+  var carreta74 = 2960;
+  var carreta76 = 3020;
+
+  var campo1 = document.getElementById("campo1");
+  var campo2 = document.getElementById("campo2");
+  var campo3 = document.getElementById("campo3");
+  var campo4 = document.getElementById("campo4");
+  var resultadoestendido24 = document.getElementById("resultadoestendido24");
+  var resultadoestendido26 = document.getElementById("resultadoestendido26");
+  var resultadotoco36 = document.getElementById("resultadotoco36");
+  var resultadoTruco42 = document.getElementById("resultadoTruco42");
+  var resultadoalongado50 = document.getElementById("resultadoalongado50");
+  var resultadocarreta72 = document.getElementById("resultadocarreta72");
+  var resultadocarreta74 = document.getElementById("resultadocarreta74");
+  var resultadocarreta76 = document.getElementById("resultadocarreta76");
+  var somenteNumeros = new RegExp("[^0-9]", "g");
+
+  var toNumber = function (value) {
+    var number = value.replace(somenteNumeros, "");    
+    number = parseInt(number);    
+    if (isNaN(number)) 
+      number = 0;
+    return number;
+  }
+
+  var somenteNumeros = function (event) {
+    event.target.value = toNumber(event.target.value);
+  }
+
+  var onInput = function (event) {
+    var num1 = toNumber(campo1.value);
+    var num2 = toNumber(campo2.value);
+    var num3 = toNumber(campo3.value);
+    var num4 = toNumber(campo4.value);
+    var calcInicial = num1 * cofre + num2 * conteiner + num3 * palete + num4 * paleteChamex;
+          
+    // calculos das diferenças
+    var calcEstendido24 = (estendido24 - calcInicial)/100;
+    var calcEstandido26 = (estendido26 - calcInicial)/100;
+    var calcToco36 = (toco36 - calcInicial)/100;
+    var calcTruco42 = (Truco42 - calcInicial)/100;
+    var calcAlongado50 = (alongado50 - calcInicial)/100;
+    var calcCarreta72 = (carreta72 - calcInicial)/100;
+    var calcCarreta74 = (carreta74 - calcInicial)/100;
+    var calcCarreta76 = (carreta76 - calcInicial)/100;
+
+    if(calcEstendido24>=0){
+      resultadoestendido24.textContent = eval(calcEstendido24);
+      duvida.textContent = "Da certo"
+    }
+    else{
+      resultadoestendido24.textContent = eval(calcEstendido24);
+      duvida.textContent = "não da certo"
+    }
+  }
+  function insert1(val){
+    result = document.getElementById('campo1');
+    result.value = result.value? parseInt(result.value) + parseInt(val) : parseInt(val);  
+    var num1 = toNumber(campo1.value);
+    var num2 = toNumber(campo2.value);
+    var num3 = toNumber(campo3.value);
+    var num4 = toNumber(campo4.value);
+    var calcInicial = num1 * cofre + num2 * conteiner + num3 * palete + num4 * paleteChamex;
+    
+    // calculos das diferenças
+    var calcEstendido24 = (estendido24 - calcInicial)/100;
+    var calcEstandido26 = (estendido26 - calcInicial)/100;
+    var calcToco36 = (toco36 - calcInicial)/100;
+    var calcTruco42 = (Truco42 - calcInicial)/100;
+    var calcAlongado50 = (alongado50 - calcInicial)/100;
+    var calcCarreta72 = (carreta72 - calcInicial)/100;
+    var calcCarreta74 = (carreta74 - calcInicial)/100;
+    var calcCarreta76 = (carreta76 - calcInicial)/100;
+    
+    if(calcEstendido24>=0){
+      resultadoestendido24.textContent = eval(calcEstendido24);
+      duvida.textContent = "Da certo"
+    }
+    else{
+      resultadoestendido24.textContent = eval(calcEstendido24);
+      duvida.textContent = "não da certo"
+    }
+  }
+  function insert2(val){
+    result = document.getElementById('campo2');
+    result.value = result.value? parseInt(result.value) + parseInt(val) : parseInt(val);  
+    var num1 = toNumber(campo1.value);
+    var num2 = toNumber(campo2.value);
+    var num3 = toNumber(campo3.value);
+    var num4 = toNumber(campo4.value);
+    var calcInicial = num1 * cofre + num2 * conteiner + num3 * palete + num4 * paleteChamex;
+
+    // calculos das diferenças
+    var calcEstendido24 = (estendido24 - calcInicial)/100;
+    var calcEstandido26 = (estendido26 - calcInicial)/100;
+    var calcToco36 = (toco36 - calcInicial)/100;
+    var calcTruco42 = (Truco42 - calcInicial)/100;
+    var calcAlongado50 = (alongado50 - calcInicial)/100;
+    var calcCarreta72 = (carreta72 - calcInicial)/100;
+    var calcCarreta74 = (carreta74 - calcInicial)/100;
+    var calcCarreta76 = (carreta76 - calcInicial)/100;
+    
+    if(calcEstendido24>=0){
+      resultadoestendido24.textContent = eval(calcEstendido24);
+      duvida.textContent = "Da certo"
+    }
+    else{
+      resultadoestendido24.textContent = eval(calcEstendido24);
+      duvida.textContent = "não da certo"
+    }
+  }
+  function insert3(val){
+    result = document.getElementById('campo3');
+    result.value = result.value? parseInt(result.value) + parseInt(val) : parseInt(val);  
+    var num1 = toNumber(campo1.value);
+    var num2 = toNumber(campo2.value);
+    var num3 = toNumber(campo3.value);
+    var num4 = toNumber(campo4.value);
+    var calcInicial = num1 * cofre + num2 * conteiner + num3 * palete + num4 * paleteChamex;
+          
+    // calculos das diferenças
+    var calcEstendido24 = (estendido24 - calcInicial)/100;
+    var calcEstandido26 = (estendido26 - calcInicial)/100;
+    var calcToco36 = (toco36 - calcInicial)/100;
+    var calcTruco42 = (Truco42 - calcInicial)/100;
+    var calcAlongado50 = (alongado50 - calcInicial)/100;
+    var calcCarreta72 = (carreta72 - calcInicial)/100;
+    var calcCarreta74 = (carreta74 - calcInicial)/100;
+    var calcCarreta76 = (carreta76 - calcInicial)/100;
+    
+    if(calcEstendido24>=0){
+      resultadoestendido24.textContent = eval(calcEstendido24);
+      duvida.textContent = "Da certo"
+    }
+    else{
+      resultadoestendido24.textContent = eval(calcEstendido24);
+      duvida.textContent = "não da certo"
+    }
+  }
+  function insert4(val){
+    result = document.getElementById('campo4');
+    result.value = result.value? parseInt(result.value) + parseInt(val) : parseInt(val);  
+    var num1 = toNumber(campo1.value);
+    var num2 = toNumber(campo2.value);
+    var num3 = toNumber(campo3.value);
+    var num4 = toNumber(campo4.value);
+    var calcInicial = num1 * cofre + num2 * conteiner + num3 * palete + num4 * paleteChamex;
+          
+    // calculos das diferenças
+    var calcEstendido24 = (estendido24 - calcInicial)/100;
+    var calcEstandido26 = (estendido26 - calcInicial)/100;
+    var calcToco36 = (toco36 - calcInicial)/100;
+    var calcTruco42 = (Truco42 - calcInicial)/100;
+    var calcAlongado50 = (alongado50 - calcInicial)/100;
+    var calcCarreta72 = (carreta72 - calcInicial)/100;
+    var calcCarreta74 = (carreta74 - calcInicial)/100;
+    var calcCarreta76 = (carreta76 - calcInicial)/100;
+    
+    if(calcEstendido24>=0){
+      resultadoestendido24.textContent = eval(calcEstendido24);
+      duvida.textContent = "Da certo"
+    }
+    else{
+      resultadoestendido24.textContent = eval(calcEstendido24);
+      duvida.textContent = "não da certo"
+    }
+  }     
+  
+  function clean()
+      {
+          document.getElementById('campo1').value = 0;
+          document.getElementById('campo2').value = 0;
+          document.getElementById('campo3').value = 0;
+          document.getElementById('campo4').value = 0;
+          resultadoestendido24.textContent = estendido24/100;
+
+          duvida.textContent = "Da certo";
+      }
+  function clean1()
+    {   
+      document.getElementById('campo1').value = 0;
+      var num1 = toNumber(campo1.value);
+      var num2 = toNumber(campo2.value);
+      var num3 = toNumber(campo3.value);
+      var num4 = toNumber(campo4.value);
+      var calcInicial = num1 * cofre + num2 * conteiner + num3 * palete + num4 * paleteChamex;
+            
+      // calculos das diferenças
+      var calcEstendido24 = (estendido24 - calcInicial)/100;
+      var calcEstandido26 = (estendido26 - calcInicial)/100;
+      var calcToco36 = (toco36 - calcInicial)/100;
+      var calcTruco42 = (Truco42 - calcInicial)/100;
+      var calcAlongado50 = (alongado50 - calcInicial)/100;
+      var calcCarreta72 = (carreta72 - calcInicial)/100;
+      var calcCarreta74 = (carreta74 - calcInicial)/100;
+      var calcCarreta76 = (carreta76 - calcInicial)/100;
+  
+      if(calcEstendido24>=0){
+        resultadoestendido24.textContent = eval(calcEstendido24);
+
+        duvida.textContent = "Da certo"
+      }
+      else{
+        resultadoestendido24.textContent = eval(calcEstendido24);
+
+        duvida.textContent = "não da certo"
+      }
+    }
+  function clean2()
+  {
+      document.getElementById('campo2').value = 0;
+      var num1 = toNumber(campo1.value);
+      var num2 = toNumber(campo2.value);
+      var num3 = toNumber(campo3.value);
+      var num4 = toNumber(campo4.value);
+      var calcInicial = num1 * cofre + num2 * conteiner + num3 * palete + num4 * paleteChamex;
+
+      // calculos das diferenças
+      var calcEstendido24 = (estendido24 - calcInicial)/100;
+      var calcEstandido26 = (estendido26 - calcInicial)/100;
+      var calcToco36 = (toco36 - calcInicial)/100;
+      var calcTruco42 = (Truco42 - calcInicial)/100;
+      var calcAlongado50 = (alongado50 - calcInicial)/100;
+      var calcCarreta72 = (carreta72 - calcInicial)/100;
+      var calcCarreta74 = (carreta74 - calcInicial)/100;
+      var calcCarreta76 = (carreta76 - calcInicial)/100;
+
+      if(calcEstendido24>=0){
+        resultadoestendido24.textContent = eval(calcEstendido24);
+
+        duvida.textContent = "Da certo"
+      }
+      else{
+        resultadoestendido24.textContent = eval(calcEstendido24);
+
+        duvida.textContent = "não da certo"
+      }
+    }
+  function clean3()
+    {
+      document.getElementById('campo3').value = 0;
+      var num1 = toNumber(campo1.value);
+      var num2 = toNumber(campo2.value);
+      var num3 = toNumber(campo3.value);
+      var num4 = toNumber(campo4.value);
+      var calcInicial = num1 * cofre + num2 * conteiner + num3 * palete + num4 * paleteChamex;
+
+      // calculos das diferenças
+      var calcEstendido24 = (estendido24 - calcInicial)/100;
+      var calcEstandido26 = (estendido26 - calcInicial)/100;
+      var calcToco36 = (toco36 - calcInicial)/100;
+      var calcTruco42 = (Truco42 - calcInicial)/100;
+      var calcAlongado50 = (alongado50 - calcInicial)/100;
+      var calcCarreta72 = (carreta72 - calcInicial)/100;
+      var calcCarreta74 = (carreta74 - calcInicial)/100;
+      var calcCarreta76 = (carreta76 - calcInicial)/100;
+
+      if(calcEstendido24>=0){
+        resultadoestendido24.textContent = eval(calcEstendido24);
+
+        duvida.textContent = "Da certo"
+      }
+      else{
+        resultadoestendido24.textContent = eval(calcEstendido24);
+
+        duvida.textContent = "não da certo"
+      }
+    }
+  function clean4()
+  {
+      document.getElementById('campo4').value = 0;
+      var num1 = toNumber(campo1.value);
+      var num2 = toNumber(campo2.value);
+      var num3 = toNumber(campo3.value);
+      var num4 = toNumber(campo4.value);
+      var calcInicial = num1 * cofre + num2 * conteiner + num3 * palete + num4 * paleteChamex;
+
+      // calculos das diferenças
+      var calcEstendido24 = (estendido24 - calcInicial)/100;
+      var calcEstandido26 = (estendido26 - calcInicial)/100;
+      var calcToco36 = (toco36 - calcInicial)/100;
+      var calcTruco42 = (Truco42 - calcInicial)/100;
+      var calcAlongado50 = (alongado50 - calcInicial)/100;
+      var calcCarreta72 = (carreta72 - calcInicial)/100;
+      var calcCarreta74 = (carreta74 - calcInicial)/100;
+      var calcCarreta76 = (carreta76 - calcInicial)/100;
+
+      if(calcEstendido24>=0){
+        resultadoestendido24.textContent = eval(calcEstendido24);
+
+        duvida.textContent = "Da certo"
+      }
+      else{
+        resultadoestendido24.textContent = eval(calcEstendido24);
+
+        duvida.textContent = "não da certo"
+      }
+    }
+
+  campo1.addEventListener("input", somenteNumeros);
+  campo2.addEventListener("input", somenteNumeros);
+  campo3.addEventListener("input", somenteNumeros);
+  campo4.addEventListener("input", somenteNumeros);
+
+  campo1.addEventListener("input", onInput);
+  campo2.addEventListener("input", onInput);
+  campo3.addEventListener("input", onInput);
+  campo4.addEventListener("input", onInput);
+  operador.addEventListener("input", onInput);
+
+  onInput();
+</script>
+</html>
