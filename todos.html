@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="static/styles.css">
+
+    <title>Document</title>
+
+</head>
+  <body>
+    <div class="header">
+        <header>
+          <img class="imagem" src="static/logo.png">
+        </header>
+      </div>
+    <table class="divInput">
+        <div class="operacao1"> 
+            <p class="operacaoP">Conteiner</p>
+            <input id='add somaConteiner' class="operacaoButton" type='button' onclick='insert1(this.value);'  value='-1' >
+            <input class="operacaoText1" id="campo1" type="number" />   
+            <input id='add somaConteiner' class="operacaoButton" type='button' onclick='insert1(this.value);'  value='1'> 
+            <button class="botaoLimpar" onclick="clean1()">Limpar</button>
+            <p class="mostraTotal">Total <span id="totalConteiner"></span></p> 
+            
+        </div>  
+
+        <div class="operacao2"> 
+            <p class="operacaoP">Cofre</p>
+            <input id='add somaConteiner' class="operacaoButton" type='button' onclick='insert2(this.value);'  value='-1' > 
+            <input class="operacaoText2" id="campo2" type="number" />         
+            <input id='add somaConteiner' class="operacaoButton" type='button' onclick='insert2(this.value);'  value='1'>
+            <button class="botaoLimpar" onclick="clean2()">Limpar</button>
+            
+            <p class="mostraTotal">Total <span id="totalCofre"></span></p> 
+        </div> 
+
+        <div class="operacao3"> 
+            <p class="operacaoP">Palete</p>
+            <input id='add somaConteiner' class="operacaoButton" type='button' onclick='insert3(this.value);'  value='-1' > 
+            <input class="operacaoText3" id="campo3" type="number" />           
+            <input id='add somaConteiner' class="operacaoButton" type='button' onclick='insert3(this.value);'  value='1'> 
+            <button class="botaoLimpar" onclick="clean3()">Limpar</button>
+    
+            <p class="mostraTotal">Total <span id="totalPalete"></span></p> 
+            
+        </div> 
+
+        <div class="operacao4"> 
+            <p class="operacaoP">Palete Chamex</p>
+            <input id='add somaConteiner' class="operacaoButton" type='button' onclick='insert4(this.value);'  value='-1' > 
+            <input class="operacaoText4" id="campo4" type="number" />        
+            <input id='add somaConteiner' class="operacaoButton" type='button' onclick='insert4(this.value);'  value='1'> 
+            <button class="botaoLimpar" onclick="clean4()">Limpar</button>
+            <p class="mostraTotal">Total <span id="totalPaleteChamex"></span></p> 
+        </div>  
+        <div>   
+            <p class="mostraResultado">Total:<span id="total"> </span></p>
+            
+        </div>
+        <button class="botaoLimparTudo" onclick="clean()">Limpar Tudo</button>
+    </table>
+    
+     
+
+    <table class="table">
+        <tr>
+            <th>Veiculos</th> <th>Metragem</th> <th>Cubagem</th><th>Diferença</th>  <th>Status</th> 
+        </tr>
+
+        <tr>
+            <td>Estendido(24)</td> <td>6,2</td> <td>12,4</td> <td> <span id="resultadoestendido24"></span> </td> <td id="podeEstendido24"><span id="duvidaEstendido24"> </span></td>
+        </tr>    
+    
+        <tr>
+            <td>Estendido(26)</td> <td>6,5</td> <td>13</td> <td> <span id="resultadoestendido26"></span> </td> <td id="podeEstendido26"><span id="duvidaEstendido26"> </span></td>
+        </tr>
+
+        <tr>
+            <td>Toco(36)</td> <td>7,5</td> <td>15</td> <td><span id="resultadotoco36"></span> </td> <td id="podeToco36"><span id="duvidaToco36"> </span></td>
+        </tr>
+
+        <tr>
+            <td>Truco(42)</td><td>8,7</td> <td>17,4</td> <td><span id="resultadoTruco42"></span> </td> <td id="podeTruco42"><span id="duvidaTruco42"> </span></td>
+        </tr>
+
+        <tr>
+            <td>Alongado(50)</td> <td>10,5</td> <td>21</td> <td><span id="resultadoalongado50"></span> </td> <td id="podeAlongado50"><span id="duvidaAlongado50"> </span></td>
+        </tr>
+
+        <tr>
+            <td>Carreta1(72)</td> <td>13,8</td> <td>27,6</td> <td><span id="resultadocarreta72"></span> </td> <td id="podeCarreta72"><span id="duvidaCarreta72"> </span></td>
+        </tr>
+
+        <tr>
+            <td>Carreta2(74)</td> <td>14,8</td> <td>29,6</td> <td><span id="resultadocarreta74"></span> </td> <td id="podeCarreta74"><span id="duvidaCarreta74"> </span></td>
+        </tr>
+
+        <tr>
+            <td>Carreta3(76)</td> <td>15,1</td> <td>30,2</td> <td><span id="resultadocarreta76"></span> </td> <td id="podeCarreta76"><span id="duvidaCarreta76"> </span></td>
+        </tr>
+        
+    </table>
+</body>
+  
+<script>
+  var cofre = 80;
+  var conteiner = 90;
+  var palete = 100;
+  var paleteChamex = 110; 
+  var estendido24 = 1240;
+  var estendido26 = 1300;
+  var toco36 = 1500;
+  var Truco42 = 1740;
+  var alongado50 = 2100;
+  var carreta72 = 2760;
+  var carreta74 = 2960;
+  var carreta76 = 3020;
+
+  var campo1 = document.getElementById("campo1");
+  var campo2 = document.getElementById("campo2");
+  var campo3 = document.getElementById("campo3");
+  var campo4 = document.getElementById("campo4");
+  var resultadoestendido24 = document.getElementById("resultadoestendido24");
+  var resultadoestendido26 = document.getElementById("resultadoestendido26");
+  var resultadotoco36 = document.getElementById("resultadotoco36");
+  var resultadoTruco42 = document.getElementById("resultadoTruco42");
+  var resultadoalongado50 = document.getElementById("resultadoalongado50");
+  var resultadocarreta72 = document.getElementById("resultadocarreta72");
+  var resultadocarreta74 = document.getElementById("resultadocarreta74");
+  var resultadocarreta76 = document.getElementById("resultadocarreta76");
+  var somenteNumeros = new RegExp("[^0-9]", "g");
+
+  var toNumber = function (value) {
+    var number = value.replace(somenteNumeros, "");    
+    number = parseInt(number);    
+    if (isNaN(number)) 
+      number = 0;
+    return number;
+  }
+
+  var somenteNumeros = function (event) {
+    event.target.value = toNumber(event.target.value);
+  }
+
+  var onInput = function (event) {
+    var num1 = toNumber(campo1.value);
+    var num2 = toNumber(campo2.value);
+    var num3 = toNumber(campo3.value);
+    var num4 = toNumber(campo4.value);
+    var calcInicial = num1 * cofre + num2 * conteiner + num3 * palete + num4 * paleteChamex;
+          
+    // calculos das diferenças
+    var calcEstendido24 = (estendido24 - calcInicial)/100;
+    var calcEstandido26 = (estendido26 - calcInicial)/100;
+    var calcToco36 = (toco36 - calcInicial)/100;
+    var calcTruco42 = (Truco42 - calcInicial)/100;
+    var calcAlongado50 = (alongado50 - calcInicial)/100;
+    var calcCarreta72 = (carreta72 - calcInicial)/100;
+    var calcCarreta74 = (carreta74 - calcInicial)/100;
+    var calcCarreta76 = (carreta76 - calcInicial)/100;
+
+    //calculo dos recipientes
+    var calcCofre = num2* conteiner;
+    var calcConteiner = num1* cofre;
+    var calcPalete = num3* palete;
+    var calcPaleteChamex = num4* paleteChamex;
+
+    totalConteiner.textContent = (calcConteiner)/100;
+    totalCofre.textContent = (calcCofre)/100;
+    totalPalete.textContent = (calcPalete)/100;
+    totalPaleteChamex.textContent = (calcPaleteChamex)/100;
+
+    if(calcEstendido24>=0){
+      resultadoestendido24.textContent = eval(calcEstendido24);
+      total.textContent = eval(calcInicial/100);
+      duvidaEstendido24.textContent = "Pode"
+      
+    }
+    else{
+      resultadoestendido24.textContent = eval(calcEstendido24);
+      total.textContent = eval(calcInicial/100);
+      duvidaEstendido24.textContent = "Não pode"
+    }
+
+    if(calcEstandido26>=0){
+        resultadoestendido26.textContent = eval(calcEstandido26);
+        duvidaEstendido26.textContent = "Pode"
+    }
+    else{
+        resultadoestendido26.textContent = eval(calcEstandido26);
+        duvidaEstendido26.textContent = "Não pode"
+    }
+
+    if(calcToco36>=0){
+        resultadotoco36.textContent = eval(calcToco36);
+        duvidaToco36.textContent = "Pode"
+    }
+    else{
+        resultadotoco36.textContent = eval(calcToco36);
+        duvidaToco36.textContent = "Não pode"
+    }
+    if(calcTruco42>=0){
+        resultadoTruco42.textContent = eval(calcTruco42);
+        duvidaTruco42.textContent = "Pode"
+    }
+    else{
+        resultadoTruco42.textContent = eval(calcTruco42);
+        duvidaTruco42.textContent = "Não pode"
+    }
+
+    if(calcAlongado50>=0){
+        resultadoalongado50.textContent = eval(calcAlongado50);
+        duvidaAlongado50.textContent = "Pode"
+    }
+    else{
+        resultadoalongado50.textContent = eval(calcAlongado50);
+        duvidaAlongado50.textContent = "Não pode"
+    }
+
+    if(calcCarreta72>=0){
+        resultadocarreta72.textContent = eval(calcCarreta72);
+        duvidaCarreta72.textContent = "Pode"
+    }
+    else{
+        resultadocarreta72.textContent = eval(calcCarreta72);
+        duvidaCarreta72.textContent = "Não pode"
+    }
+    if(calcCarreta72>=0){
+        resultadocarreta72.textContent = eval(calcCarreta72);
+        duvidaCarreta72.textContent = "Pode"
+    }
+    else{
+        resultadocarreta72.textContent = eval(calcCarreta72);
+        duvidaCarreta72.textContent = "Não pode"
+    }
+    if(calcCarreta74>=0){
+        resultadocarreta74.textContent = eval(calcCarreta74);
+        duvidaCarreta74.textContent = "Pode"
+    }
+    else{
+        resultadocarreta74.textContent = eval(calcCarreta74);
+        duvidaCarreta74.textContent = "Não pode"
+    }
+    if(calcCarreta76>=0){
+        resultadocarreta76.textContent = eval(calcCarreta76);
+        duvidaCarreta76.textContent = "Pode"
+    }
+    else{
+        resultadocarreta76.textContent = eval(calcCarreta76);
+        duvidaCarreta76.textContent = "Não pode"
+    }
+  } 
+
+
+  function insert1(val){
+    result = document.getElementById('campo1');
+    result.value = result.value? parseInt(result.value) + parseInt(val) : parseInt(val);  
+    var num1 = toNumber(campo1.value);
+    var num2 = toNumber(campo2.value);
+    var num3 = toNumber(campo3.value);
+    var num4 = toNumber(campo4.value);
+    var calcInicial = num1 * cofre + num2 * conteiner + num3 * palete + num4 * paleteChamex;
+    
+    // calculos das diferenças
+    var calcEstendido24 = (estendido24 - calcInicial)/100;
+    var calcEstandido26 = (estendido26 - calcInicial)/100;
+    var calcToco36 = (toco36 - calcInicial)/100;
+    var calcTruco42 = (Truco42 - calcInicial)/100;
+    var calcAlongado50 = (alongado50 - calcInicial)/100;
+    var calcCarreta72 = (carreta72 - calcInicial)/100;
+    var calcCarreta74 = (carreta74 - calcInicial)/100;
+    var calcCarreta76 = (carreta76 - calcInicial)/100;
+
+    //calculo dos recipientes
+    var calcConteiner = num1* cofre;
+    var calcCofre = num2* conteiner;
+    var calcPalete = num3* palete;
+    var calcPaleteChamex = num4* paleteChamex;
+
+    totalConteiner.textContent = (calcConteiner)/100;
+    totalCofre.textContent = (calcCofre)/100;
+    totalPalete.textContent = (calcPalete)/100;
+    totalPaleteChamex.textContent = (calcPaleteChamex)/100;
+
+    if(calcEstendido24>=0){
+      resultadoestendido24.textContent = eval(calcEstendido24);
+      total.textContent = eval(calcInicial/100);
+      duvidaEstendido24.textContent = "Pode"
+      document.getElementById("podeEstendido24").style.background = "green";
+    }
+    else{
+      resultadoestendido24.textContent = eval(calcEstendido24);
+      total.textContent = eval(calcInicial/100);
+      duvidaEstendido24.textContent = "Não pode"
+      document.getElementById("podeEstendido24").style.background = "red";
+    }
+
+    if(calcEstandido26>=0){
+        resultadoestendido26.textContent = eval(calcEstandido26);
+        duvidaEstendido26.textContent = "Pode"
+        document.getElementById("podeEstendido26").style.background = "green";
+    }
+    else{
+        resultadoestendido26.textContent = eval(calcEstandido26);
+        duvidaEstendido26.textContent = "Não pode"
+        document.getElementById("podeEstendido26").style.background = "red";
+    }
+
+    if(calcToco36>=0){
+        resultadotoco36.textContent = eval(calcToco36);
+        duvidaToco36.textContent = "Pode"
+        document.getElementById("podeToco36").style.background = "green";
+    }
+    else{
+        resultadotoco36.textContent = eval(calcToco36);
+        duvidaToco36.textContent = "Não pode"
+        document.getElementById("podeToco36").style.background = "red";
+    }
+    if(calcTruco42>=0){
+        resultadoTruco42.textContent = eval(calcTruco42);
+        duvidaTruco42.textContent = "Pode"
+        document.getElementById("podeTruco42").style.background = "green";
+    }
+    else{
+        resultadoTruco42.textContent = eval(calcTruco42);
+        duvidaTruco42.textContent = "Não pode"
+        document.getElementById("podeTruco42").style.background = "red";
+    }
+
+    if(calcAlongado50>=0){
+        resultadoalongado50.textContent = eval(calcAlongado50);
+        duvidaAlongado50.textContent = "Pode"
+        document.getElementById("podeAlongado50").style.background = "green";
+    }
+    else{
+        resultadoalongado50.textContent = eval(calcAlongado50);
+        duvidaAlongado50.textContent = "Não pode"
+        document.getElementById("podeAlongado50").style.background = "red";
+    }
+
+    if(calcCarreta72>=0){
+        resultadocarreta72.textContent = eval(calcCarreta72);
+        duvidaCarreta72.textContent = "Pode"
+        document.getElementById("podeCarreta72").style.background = "green";
+    }
+    else{
+        resultadocarreta72.textContent = eval(calcCarreta72);
+        duvidaCarreta72.textContent = "Não pode"
+        document.getElementById("podeCarreta72").style.background = "red";
+
+    }
+    if(calcCarreta74>=0){
+        resultadocarreta74.textContent = eval(calcCarreta74);
+        duvidaCarreta74.textContent = "Pode"
+        document.getElementById("podeCarreta74").style.background = "green";
+    }
+    else{
+        resultadocarreta74.textContent = eval(calcCarreta74);
+        duvidaCarreta74.textContent = "Não pode"
+        document.getElementById("podeCarreta74").style.background = "red";
+    }
+    if(calcCarreta76>=0){
+        resultadocarreta76.textContent = eval(calcCarreta76);
+        duvidaCarreta76.textContent = "Pode"
+        document.getElementById("podeCarreta76").style.background = "green";
+    }
+    else{
+        resultadocarreta76.textContent = eval(calcCarreta76);
+        duvidaCarreta76.textContent = "Não pode"
+        document.getElementById("podeCarreta76").style.background = "red";
+    }
+    
+  }
+  function insert2(val){
+    result = document.getElementById('campo2');
+    result.value = result.value? parseInt(result.value) + parseInt(val) : parseInt(val);  
+    var num1 = toNumber(campo1.value);
+    var num2 = toNumber(campo2.value);
+    var num3 = toNumber(campo3.value);
+    var num4 = toNumber(campo4.value);
+    var calcInicial = num1 * cofre + num2 * conteiner + num3 * palete + num4 * paleteChamex;
+
+    // calculos das diferenças
+    var calcEstendido24 = (estendido24 - calcInicial)/100;
+    var calcEstandido26 = (estendido26 - calcInicial)/100;
+    var calcToco36 = (toco36 - calcInicial)/100;
+    var calcTruco42 = (Truco42 - calcInicial)/100;
+    var calcAlongado50 = (alongado50 - calcInicial)/100;
+    var calcCarreta72 = (carreta72 - calcInicial)/100;
+    var calcCarreta74 = (carreta74 - calcInicial)/100;
+    var calcCarreta76 = (carreta76 - calcInicial)/100;
+
+    //calculo dos recipientes
+    var calcConteiner = num1* cofre;
+    var calcCofre = num2* conteiner;
+    var calcPalete = num3* palete;
+    var calcPaleteChamex = num4* paleteChamex;
+
+    totalConteiner.textContent = (calcConteiner)/100;
+    totalCofre.textContent = (calcCofre)/100;
+    totalPalete.textContent = (calcPalete)/100;
+    totalPaleteChamex.textContent = (calcPaleteChamex)/100;
+
+    if(calcEstendido24>=0){
+      resultadoestendido24.textContent = eval(calcEstendido24);
+      total.textContent = eval(calcInicial/100);
+      duvidaEstendido24.textContent = "Pode"
+      document.getElementById("podeEstendido24").style.background = "green";
+    }
+    else{
+      resultadoestendido24.textContent = eval(calcEstendido24);
+      total.textContent = eval(calcInicial/100);
+      duvidaEstendido24.textContent = "Não pode"
+      document.getElementById("podeEstendido24").style.background = "red";
+    }
+
+    if(calcEstandido26>=0){
+        resultadoestendido26.textContent = eval(calcEstandido26);
+        duvidaEstendido26.textContent = "Pode"
+        document.getElementById("podeEstendido26").style.background = "green";
+    }
+    else{
+        resultadoestendido26.textContent = eval(calcEstandido26);
+        duvidaEstendido26.textContent = "Não pode"
+        document.getElementById("podeEstendido26").style.background = "red";
+    }
+
+    if(calcToco36>=0){
+        resultadotoco36.textContent = eval(calcToco36);
+        duvidaToco36.textContent = "Pode"
+        document.getElementById("podeToco36").style.background = "green";
+    }
+    else{
+        resultadotoco36.textContent = eval(calcToco36);
+        duvidaToco36.textContent = "Não pode"
+        document.getElementById("podeToco36").style.background = "red";
+    }
+    if(calcTruco42>=0){
+        resultadoTruco42.textContent = eval(calcTruco42);
+        duvidaTruco42.textContent = "Pode"
+        document.getElementById("podeTruco42").style.background = "green";
+    }
+    else{
+        resultadoTruco42.textContent = eval(calcTruco42);
+        duvidaTruco42.textContent = "Não pode"
+        document.getElementById("podeTruco42").style.background = "red";
+    }
+
+    if(calcAlongado50>=0){
+        resultadoalongado50.textContent = eval(calcAlongado50);
+        duvidaAlongado50.textContent = "Pode"
+        document.getElementById("podeAlongado50").style.background = "green";
+    }
+    else{
+        resultadoalongado50.textContent = eval(calcAlongado50);
+        duvidaAlongado50.textContent = "Não pode"
+        document.getElementById("podeAlongado50").style.background = "red";
+    }
+
+    if(calcCarreta72>=0){
+        resultadocarreta72.textContent = eval(calcCarreta72);
+        duvidaCarreta72.textContent = "Pode"
+        document.getElementById("podeCarreta72").style.background = "green";
+    }
+    else{
+        resultadocarreta72.textContent = eval(calcCarreta72);
+        duvidaCarreta72.textContent = "Não pode"
+        document.getElementById("podeCarreta72").style.background = "red";
+
+    }
+    if(calcCarreta74>=0){
+        resultadocarreta74.textContent = eval(calcCarreta74);
+        duvidaCarreta74.textContent = "Pode"
+        document.getElementById("podeCarreta74").style.background = "green";
+    }
+    else{
+        resultadocarreta74.textContent = eval(calcCarreta74);
+        duvidaCarreta74.textContent = "Não pode"
+        document.getElementById("podeCarreta74").style.background = "red";
+    }
+    if(calcCarreta76>=0){
+        resultadocarreta76.textContent = eval(calcCarreta76);
+        duvidaCarreta76.textContent = "Pode"
+        document.getElementById("podeCarreta76").style.background = "green";
+    }
+    else{
+        resultadocarreta76.textContent = eval(calcCarreta76);
+        duvidaCarreta76.textContent = "Não pode"
+        document.getElementById("podeCarreta76").style.background = "red";
+    }
+  }
+  function insert3(val){
+    result = document.getElementById('campo3');
+    result.value = result.value? parseInt(result.value) + parseInt(val) : parseInt(val);  
+    var num1 = toNumber(campo1.value);
+    var num2 = toNumber(campo2.value);
+    var num3 = toNumber(campo3.value);
+    var num4 = toNumber(campo4.value);
+    var calcInicial = num1 * cofre + num2 * conteiner + num3 * palete + num4 * paleteChamex;
+          
+    // calculos das diferenças
+    var calcEstendido24 = (estendido24 - calcInicial)/100;
+    var calcEstandido26 = (estendido26 - calcInicial)/100;
+    var calcToco36 = (toco36 - calcInicial)/100;
+    var calcTruco42 = (Truco42 - calcInicial)/100;
+    var calcAlongado50 = (alongado50 - calcInicial)/100;
+    var calcCarreta72 = (carreta72 - calcInicial)/100;
+    var calcCarreta74 = (carreta74 - calcInicial)/100;
+    var calcCarreta76 = (carreta76 - calcInicial)/100;
+
+    //calculo dos recipientes
+    var calcConteiner = num1* cofre;
+    var calcCofre = num2* conteiner;
+    var calcPalete = num3* palete;
+    var calcPaleteChamex = num4* paleteChamex;
+
+    totalConteiner.textContent = (calcConteiner)/100;
+    totalCofre.textContent = (calcCofre)/100;
+    totalPalete.textContent = (calcPalete)/100;
+    totalPaleteChamex.textContent = (calcPaleteChamex)/100;
+
+    if(calcEstendido24>=0){
+      resultadoestendido24.textContent = eval(calcEstendido24);
+      total.textContent = eval(calcInicial/100);
+      duvidaEstendido24.textContent = "Pode"
+      document.getElementById("podeEstendido24").style.background = "green";
+    }
+    else{
+      resultadoestendido24.textContent = eval(calcEstendido24);
+      total.textContent = eval(calcInicial/100);
+      duvidaEstendido24.textContent = "Não pode"
+      document.getElementById("podeEstendido24").style.background = "red";
+    }
+
+    if(calcEstandido26>=0){
+        resultadoestendido26.textContent = eval(calcEstandido26);
+        duvidaEstendido26.textContent = "Pode"
+        document.getElementById("podeEstendido26").style.background = "green";
+    }
+    else{
+        resultadoestendido26.textContent = eval(calcEstandido26);
+        duvidaEstendido26.textContent = "Não pode"
+        document.getElementById("podeEstendido26").style.background = "red";
+    }
+
+    if(calcToco36>=0){
+        resultadotoco36.textContent = eval(calcToco36);
+        duvidaToco36.textContent = "Pode"
+        document.getElementById("podeToco36").style.background = "green";
+    }
+    else{
+        resultadotoco36.textContent = eval(calcToco36);
+        duvidaToco36.textContent = "Não pode"
+        document.getElementById("podeToco36").style.background = "red";
+    }
+    if(calcTruco42>=0){
+        resultadoTruco42.textContent = eval(calcTruco42);
+        duvidaTruco42.textContent = "Pode"
+        document.getElementById("podeTruco42").style.background = "green";
+    }
+    else{
+        resultadoTruco42.textContent = eval(calcTruco42);
+        duvidaTruco42.textContent = "Não pode"
+        document.getElementById("podeTruco42").style.background = "red";
+    }
+
+    if(calcAlongado50>=0){
+        resultadoalongado50.textContent = eval(calcAlongado50);
+        duvidaAlongado50.textContent = "Pode"
+        document.getElementById("podeAlongado50").style.background = "green";
+    }
+    else{
+        resultadoalongado50.textContent = eval(calcAlongado50);
+        duvidaAlongado50.textContent = "Não pode"
+        document.getElementById("podeAlongado50").style.background = "red";
+    }
+
+    if(calcCarreta72>=0){
+        resultadocarreta72.textContent = eval(calcCarreta72);
+        duvidaCarreta72.textContent = "Pode"
+        document.getElementById("podeCarreta72").style.background = "green";
+    }
+    else{
+        resultadocarreta72.textContent = eval(calcCarreta72);
+        duvidaCarreta72.textContent = "Não pode"
+        document.getElementById("podeCarreta72").style.background = "red";
+
+    }
+    if(calcCarreta74>=0){
+        resultadocarreta74.textContent = eval(calcCarreta74);
+        duvidaCarreta74.textContent = "Pode"
+        document.getElementById("podeCarreta74").style.background = "green";
+    }
+    else{
+        resultadocarreta74.textContent = eval(calcCarreta74);
+        duvidaCarreta74.textContent = "Não pode"
+        document.getElementById("podeCarreta74").style.background = "red";
+    }
+    if(calcCarreta76>=0){
+        resultadocarreta76.textContent = eval(calcCarreta76);
+        duvidaCarreta76.textContent = "Pode"
+        document.getElementById("podeCarreta76").style.background = "green";
+    }
+    else{
+        resultadocarreta76.textContent = eval(calcCarreta76);
+        duvidaCarreta76.textContent = "Não pode"
+        document.getElementById("podeCarreta76").style.background = "red";
+    }
+  }
+  function insert4(val){
+    result = document.getElementById('campo4');
+    result.value = result.value? parseInt(result.value) + parseInt(val) : parseInt(val);  
+    var num1 = toNumber(campo1.value);
+    var num2 = toNumber(campo2.value);
+    var num3 = toNumber(campo3.value);
+    var num4 = toNumber(campo4.value);
+    var calcInicial = num1 * cofre + num2 * conteiner + num3 * palete + num4 * paleteChamex;
+          
+    // calculos das diferenças
+    var calcEstendido24 = (estendido24 - calcInicial)/100;
+    var calcEstandido26 = (estendido26 - calcInicial)/100;
+    var calcToco36 = (toco36 - calcInicial)/100;
+    var calcTruco42 = (Truco42 - calcInicial)/100;
+    var calcAlongado50 = (alongado50 - calcInicial)/100;
+    var calcCarreta72 = (carreta72 - calcInicial)/100;
+    var calcCarreta74 = (carreta74 - calcInicial)/100;
+    var calcCarreta76 = (carreta76 - calcInicial)/100;
+
+    //calculo dos recipientes
+    var calcConteiner = num1* cofre;
+    var calcCofre = num2* conteiner;
+    var calcPalete = num3* palete;
+    var calcPaleteChamex = num4* paleteChamex;
+
+    totalConteiner.textContent = (calcConteiner)/100;
+    totalCofre.textContent = (calcCofre)/100;
+    totalPalete.textContent = (calcPalete)/100;
+    totalPaleteChamex.textContent = (calcPaleteChamex)/100;
+
+    if(calcEstendido24>=0){
+      resultadoestendido24.textContent = eval(calcEstendido24);
+      total.textContent = eval(calcInicial/100);
+      duvidaEstendido24.textContent = "Pode"
+      document.getElementById("podeEstendido24").style.background = "green";
+    }
+    else{
+      resultadoestendido24.textContent = eval(calcEstendido24);
+      total.textContent = eval(calcInicial/100);
+      duvidaEstendido24.textContent = "Não pode"
+      document.getElementById("podeEstendido24").style.background = "red";
+    }
+
+    if(calcEstandido26>=0){
+        resultadoestendido26.textContent = eval(calcEstandido26);
+        duvidaEstendido26.textContent = "Pode"
+        document.getElementById("podeEstendido26").style.background = "green";
+    }
+    else{
+        resultadoestendido26.textContent = eval(calcEstandido26);
+        duvidaEstendido26.textContent = "Não pode"
+        document.getElementById("podeEstendido26").style.background = "red";
+    }
+
+    if(calcToco36>=0){
+        resultadotoco36.textContent = eval(calcToco36);
+        duvidaToco36.textContent = "Pode"
+        document.getElementById("podeToco36").style.background = "green";
+    }
+    else{
+        resultadotoco36.textContent = eval(calcToco36);
+        duvidaToco36.textContent = "Não pode"
+        document.getElementById("podeToco36").style.background = "red";
+    }
+    if(calcTruco42>=0){
+        resultadoTruco42.textContent = eval(calcTruco42);
+        duvidaTruco42.textContent = "Pode"
+        document.getElementById("podeTruco42").style.background = "green";
+    }
+    else{
+        resultadoTruco42.textContent = eval(calcTruco42);
+        duvidaTruco42.textContent = "Não pode"
+        document.getElementById("podeTruco42").style.background = "red";
+    }
+
+    if(calcAlongado50>=0){
+        resultadoalongado50.textContent = eval(calcAlongado50);
+        duvidaAlongado50.textContent = "Pode"
+        document.getElementById("podeAlongado50").style.background = "green";
+    }
+    else{
+        resultadoalongado50.textContent = eval(calcAlongado50);
+        duvidaAlongado50.textContent = "Não pode"
+        document.getElementById("podeAlongado50").style.background = "red";
+    }
+
+    if(calcCarreta72>=0){
+        resultadocarreta72.textContent = eval(calcCarreta72);
+        duvidaCarreta72.textContent = "Pode"
+        document.getElementById("podeCarreta72").style.background = "green";
+    }
+    else{
+        resultadocarreta72.textContent = eval(calcCarreta72);
+        duvidaCarreta72.textContent = "Não pode"
+        document.getElementById("podeCarreta72").style.background = "red";
+
+    }
+    if(calcCarreta74>=0){
+        resultadocarreta74.textContent = eval(calcCarreta74);
+        duvidaCarreta74.textContent = "Pode"
+        document.getElementById("podeCarreta74").style.background = "green";
+    }
+    else{
+        resultadocarreta74.textContent = eval(calcCarreta74);
+        duvidaCarreta74.textContent = "Não pode"
+        document.getElementById("podeCarreta74").style.background = "red";
+    }
+    if(calcCarreta76>=0){
+        resultadocarreta76.textContent = eval(calcCarreta76);
+        duvidaCarreta76.textContent = "Pode"
+        document.getElementById("podeCarreta76").style.background = "green";
+    }
+    else{
+        resultadocarreta76.textContent = eval(calcCarreta76);
+        duvidaCarreta76.textContent = "Não pode"
+        document.getElementById("podeCarreta76").style.background = "red";
+    }
+  }     
+  
+  function clean()
+      {
+          document.getElementById('campo1').value = 0;
+          document.getElementById('campo2').value = 0;
+          document.getElementById('campo3').value = 0;
+          document.getElementById('campo4').value = 0;
+          var num1 = toNumber(campo1.value);
+        var num2 = toNumber(campo2.value);
+        var num3 = toNumber(campo3.value);
+        var num4 = toNumber(campo4.value);
+        var calcInicial = num1 * cofre + num2 * conteiner + num3 * palete + num4 * paleteChamex;
+                
+        // calculos das diferenças
+        var calcEstendido24 = (estendido24 - calcInicial)/100;
+        var calcEstandido26 = (estendido26 - calcInicial)/100;
+        var calcToco36 = (toco36 - calcInicial)/100;
+        var calcTruco42 = (Truco42 - calcInicial)/100;
+        var calcAlongado50 = (alongado50 - calcInicial)/100;
+        var calcCarreta72 = (carreta72 - calcInicial)/100;
+        var calcCarreta74 = (carreta74 - calcInicial)/100;
+        var calcCarreta76 = (carreta76 - calcInicial)/100;
+
+        //calculo dos recipientes
+        var calcConteiner = num1* cofre;
+        var calcCofre = num2* conteiner;
+        var calcPalete = num3* palete;
+        var calcPaleteChamex = num4* paleteChamex;
+
+        totalConteiner.textContent = (calcConteiner)/100
+   ;     totalCofre.textContent = (calcCofre)/100
+    ;    totalPalete.textContent = (calcPalete)/100;
+    
+    totalPaleteChamex.textContent = (calcPaleteChamex)/100; 
+    if(calcEstendido24>=0){
+      resultadoestendido24.textContent = eval(calcEstendido24);
+      total.textContent = eval(calcInicial/100);
+      duvidaEstendido24.textContent = "Pode"
+      document.getElementById("podeEstendido24").style.background = "green";
+    }
+    else{
+      resultadoestendido24.textContent = eval(calcEstendido24);
+      total.textContent = eval(calcInicial/100);
+      duvidaEstendido24.textContent = "Não pode"
+      document.getElementById("podeEstendido24").style.background = "red";
+    }
+
+    if(calcEstandido26>=0){
+        resultadoestendido26.textContent = eval(calcEstandido26);
+        duvidaEstendido26.textContent = "Pode"
+        document.getElementById("podeEstendido26").style.background = "green";
+    }
+    else{
+        resultadoestendido26.textContent = eval(calcEstandido26);
+        duvidaEstendido26.textContent = "Não pode"
+        document.getElementById("podeEstendido26").style.background = "red";
+    }
+
+    if(calcToco36>=0){
+        resultadotoco36.textContent = eval(calcToco36);
+        duvidaToco36.textContent = "Pode"
+        document.getElementById("podeToco36").style.background = "green";
+    }
+    else{
+        resultadotoco36.textContent = eval(calcToco36);
+        duvidaToco36.textContent = "Não pode"
+        document.getElementById("podeToco36").style.background = "red";
+    }
+    if(calcTruco42>=0){
+        resultadoTruco42.textContent = eval(calcTruco42);
+        duvidaTruco42.textContent = "Pode"
+        document.getElementById("podeTruco42").style.background = "green";
+    }
+    else{
+        resultadoTruco42.textContent = eval(calcTruco42);
+        duvidaTruco42.textContent = "Não pode"
+        document.getElementById("podeTruco42").style.background = "red";
+    }
+
+    if(calcAlongado50>=0){
+        resultadoalongado50.textContent = eval(calcAlongado50);
+        duvidaAlongado50.textContent = "Pode"
+        document.getElementById("podeAlongado50").style.background = "green";
+    }
+    else{
+        resultadoalongado50.textContent = eval(calcAlongado50);
+        duvidaAlongado50.textContent = "Não pode"
+        document.getElementById("podeAlongado50").style.background = "red";
+    }
+
+    if(calcCarreta72>=0){
+        resultadocarreta72.textContent = eval(calcCarreta72);
+        duvidaCarreta72.textContent = "Pode"
+        document.getElementById("podeCarreta72").style.background = "green";
+    }
+    else{
+        resultadocarreta72.textContent = eval(calcCarreta72);
+        duvidaCarreta72.textContent = "Não pode"
+        document.getElementById("podeCarreta72").style.background = "red";
+
+    }
+    if(calcCarreta74>=0){
+        resultadocarreta74.textContent = eval(calcCarreta74);
+        duvidaCarreta74.textContent = "Pode"
+        document.getElementById("podeCarreta74").style.background = "green";
+    }
+    else{
+        resultadocarreta74.textContent = eval(calcCarreta74);
+        duvidaCarreta74.textContent = "Não pode"
+        document.getElementById("podeCarreta74").style.background = "red";
+    }
+    if(calcCarreta76>=0){
+        resultadocarreta76.textContent = eval(calcCarreta76);
+        duvidaCarreta76.textContent = "Pode"
+        document.getElementById("podeCarreta76").style.background = "green";
+    }
+    else{
+        resultadocarreta76.textContent = eval(calcCarreta76);
+        duvidaCarreta76.textContent = "Não pode"
+        document.getElementById("podeCarreta76").style.background = "red";
+    }
+
+        
+        
+    }
+      
+  function clean1()
+    {   
+      document.getElementById('campo1').value = 0;
+      var num1 = toNumber(campo1.value);
+      var num2 = toNumber(campo2.value);
+      var num3 = toNumber(campo3.value);
+      var num4 = toNumber(campo4.value);
+      var calcInicial = num1 * cofre + num2 * conteiner + num3 * palete + num4 * paleteChamex;
+            
+      // calculos das diferenças
+      var calcEstendido24 = (estendido24 - calcInicial)/100;
+      var calcEstandido26 = (estendido26 - calcInicial)/100;
+      var calcToco36 = (toco36 - calcInicial)/100;
+      var calcTruco42 = (Truco42 - calcInicial)/100;
+      var calcAlongado50 = (alongado50 - calcInicial)/100;
+      var calcCarreta72 = (carreta72 - calcInicial)/100;
+      var calcCarreta74 = (carreta74 - calcInicial)/100;
+      var calcCarreta76 = (carreta76 - calcInicial)/100;
+
+      //calculo dos recipientes
+      var calcConteiner = num1* cofre;
+      var calcCofre = num2* conteiner;
+      var calcPalete = num3* palete;
+      var calcPaleteChamex = num4* paleteChamex;
+
+      totalConteiner.textContent = (calcConteiner)/100
+ ;     totalCofre.textContent = (calcCofre)/100
+  ;    totalPalete.textContent = (calcPalete)/100;
+  
+  totalPaleteChamex.textContent = (calcPaleteChamex)/100; 
+  if(calcEstendido24>=0){
+      resultadoestendido24.textContent = eval(calcEstendido24);
+      total.textContent = eval(calcInicial/100);
+      duvidaEstendido24.textContent = "Pode"
+      document.getElementById("podeEstendido24").style.background = "green";
+    }
+    else{
+      resultadoestendido24.textContent = eval(calcEstendido24);
+      total.textContent = eval(calcInicial/100);
+      duvidaEstendido24.textContent = "Não pode"
+      document.getElementById("podeEstendido24").style.background = "red";
+    }
+
+    if(calcEstandido26>=0){
+        resultadoestendido26.textContent = eval(calcEstandido26);
+        duvidaEstendido26.textContent = "Pode"
+        document.getElementById("podeEstendido26").style.background = "green";
+    }
+    else{
+        resultadoestendido26.textContent = eval(calcEstandido26);
+        duvidaEstendido26.textContent = "Não pode"
+        document.getElementById("podeEstendido26").style.background = "red";
+    }
+
+    if(calcToco36>=0){
+        resultadotoco36.textContent = eval(calcToco36);
+        duvidaToco36.textContent = "Pode"
+        document.getElementById("podeToco36").style.background = "green";
+    }
+    else{
+        resultadotoco36.textContent = eval(calcToco36);
+        duvidaToco36.textContent = "Não pode"
+        document.getElementById("podeToco36").style.background = "red";
+    }
+    if(calcTruco42>=0){
+        resultadoTruco42.textContent = eval(calcTruco42);
+        duvidaTruco42.textContent = "Pode"
+        document.getElementById("podeTruco42").style.background = "green";
+    }
+    else{
+        resultadoTruco42.textContent = eval(calcTruco42);
+        duvidaTruco42.textContent = "Não pode"
+        document.getElementById("podeTruco42").style.background = "red";
+    }
+
+    if(calcAlongado50>=0){
+        resultadoalongado50.textContent = eval(calcAlongado50);
+        duvidaAlongado50.textContent = "Pode"
+        document.getElementById("podeAlongado50").style.background = "green";
+    }
+    else{
+        resultadoalongado50.textContent = eval(calcAlongado50);
+        duvidaAlongado50.textContent = "Não pode"
+        document.getElementById("podeAlongado50").style.background = "red";
+    }
+
+    if(calcCarreta72>=0){
+        resultadocarreta72.textContent = eval(calcCarreta72);
+        duvidaCarreta72.textContent = "Pode"
+        document.getElementById("podeCarreta72").style.background = "green";
+    }
+    else{
+        resultadocarreta72.textContent = eval(calcCarreta72);
+        duvidaCarreta72.textContent = "Não pode"
+        document.getElementById("podeCarreta72").style.background = "red";
+
+    }
+    if(calcCarreta74>=0){
+        resultadocarreta74.textContent = eval(calcCarreta74);
+        duvidaCarreta74.textContent = "Pode"
+        document.getElementById("podeCarreta74").style.background = "green";
+    }
+    else{
+        resultadocarreta74.textContent = eval(calcCarreta74);
+        duvidaCarreta74.textContent = "Não pode"
+        document.getElementById("podeCarreta74").style.background = "red";
+    }
+    if(calcCarreta76>=0){
+        resultadocarreta76.textContent = eval(calcCarreta76);
+        duvidaCarreta76.textContent = "Pode"
+        document.getElementById("podeCarreta76").style.background = "green";
+    }
+    else{
+        resultadocarreta76.textContent = eval(calcCarreta76);
+        duvidaCarreta76.textContent = "Não pode"
+        document.getElementById("podeCarreta76").style.background = "red";
+    }
+    }
+  function clean2()
+  {
+      document.getElementById('campo2').value = 0;
+      var num1 = toNumber(campo1.value);
+      var num2 = toNumber(campo2.value);
+      var num3 = toNumber(campo3.value);
+      var num4 = toNumber(campo4.value);
+      var calcInicial = num1 * cofre + num2 * conteiner + num3 * palete + num4 * paleteChamex;
+
+      // calculos das diferenças
+      var calcEstendido24 = (estendido24 - calcInicial)/100;
+      var calcEstandido26 = (estendido26 - calcInicial)/100;
+      var calcToco36 = (toco36 - calcInicial)/100;
+      var calcTruco42 = (Truco42 - calcInicial)/100;
+      var calcAlongado50 = (alongado50 - calcInicial)/100;
+      var calcCarreta72 = (carreta72 - calcInicial)/100;
+      var calcCarreta74 = (carreta74 - calcInicial)/100;
+      var calcCarreta76 = (carreta76 - calcInicial)/100;
+
+      //calculo dos recipientes
+      var calcConteiner = num1* cofre;
+      var calcCofre = num2* conteiner;
+      var calcPalete = num3* palete;
+      var calcPaleteChamex = num4* paleteChamex;
+
+      totalConteiner.textContent = (calcConteiner)/100
+ ;     totalCofre.textContent = (calcCofre)/100
+  ;    totalPalete.textContent = (calcPalete)/100;
+
+  totalPaleteChamex.textContent = (calcPaleteChamex)/100; 
+  if(calcEstendido24>=0){
+      resultadoestendido24.textContent = eval(calcEstendido24);
+      total.textContent = eval(calcInicial/100);
+      duvidaEstendido24.textContent = "Pode"
+      document.getElementById("podeEstendido24").style.background = "green";
+    }
+    else{
+      resultadoestendido24.textContent = eval(calcEstendido24);
+      total.textContent = eval(calcInicial/100);
+      duvidaEstendido24.textContent = "Não pode"
+      document.getElementById("podeEstendido24").style.background = "red";
+    }
+
+    if(calcEstandido26>=0){
+        resultadoestendido26.textContent = eval(calcEstandido26);
+        duvidaEstendido26.textContent = "Pode"
+        document.getElementById("podeEstendido26").style.background = "green";
+    }
+    else{
+        resultadoestendido26.textContent = eval(calcEstandido26);
+        duvidaEstendido26.textContent = "Não pode"
+        document.getElementById("podeEstendido26").style.background = "red";
+    }
+
+    if(calcToco36>=0){
+        resultadotoco36.textContent = eval(calcToco36);
+        duvidaToco36.textContent = "Pode"
+        document.getElementById("podeToco36").style.background = "green";
+    }
+    else{
+        resultadotoco36.textContent = eval(calcToco36);
+        duvidaToco36.textContent = "Não pode"
+        document.getElementById("podeToco36").style.background = "red";
+    }
+    if(calcTruco42>=0){
+        resultadoTruco42.textContent = eval(calcTruco42);
+        duvidaTruco42.textContent = "Pode"
+        document.getElementById("podeTruco42").style.background = "green";
+    }
+    else{
+        resultadoTruco42.textContent = eval(calcTruco42);
+        duvidaTruco42.textContent = "Não pode"
+        document.getElementById("podeTruco42").style.background = "red";
+    }
+
+    if(calcAlongado50>=0){
+        resultadoalongado50.textContent = eval(calcAlongado50);
+        duvidaAlongado50.textContent = "Pode"
+        document.getElementById("podeAlongado50").style.background = "green";
+    }
+    else{
+        resultadoalongado50.textContent = eval(calcAlongado50);
+        duvidaAlongado50.textContent = "Não pode"
+        document.getElementById("podeAlongado50").style.background = "red";
+    }
+
+    if(calcCarreta72>=0){
+        resultadocarreta72.textContent = eval(calcCarreta72);
+        duvidaCarreta72.textContent = "Pode"
+        document.getElementById("podeCarreta72").style.background = "green";
+    }
+    else{
+        resultadocarreta72.textContent = eval(calcCarreta72);
+        duvidaCarreta72.textContent = "Não pode"
+        document.getElementById("podeCarreta72").style.background = "red";
+
+    }
+    if(calcCarreta74>=0){
+        resultadocarreta74.textContent = eval(calcCarreta74);
+        duvidaCarreta74.textContent = "Pode"
+        document.getElementById("podeCarreta74").style.background = "green";
+    }
+    else{
+        resultadocarreta74.textContent = eval(calcCarreta74);
+        duvidaCarreta74.textContent = "Não pode"
+        document.getElementById("podeCarreta74").style.background = "red";
+    }
+    if(calcCarreta76>=0){
+        resultadocarreta76.textContent = eval(calcCarreta76);
+        duvidaCarreta76.textContent = "Pode"
+        document.getElementById("podeCarreta76").style.background = "green";
+    }
+    else{
+        resultadocarreta76.textContent = eval(calcCarreta76);
+        duvidaCarreta76.textContent = "Não pode"
+        document.getElementById("podeCarreta76").style.background = "red";
+    }
+    }
+  function clean3()
+    {
+      document.getElementById('campo3').value = 0;
+      var num1 = toNumber(campo1.value);
+      var num2 = toNumber(campo2.value);
+      var num3 = toNumber(campo3.value);
+      var num4 = toNumber(campo4.value);
+      var calcInicial = num1 * cofre + num2 * conteiner + num3 * palete + num4 * paleteChamex;
+
+      // calculos das diferenças
+      var calcEstendido24 = (estendido24 - calcInicial)/100;
+      var calcEstandido26 = (estendido26 - calcInicial)/100;
+      var calcToco36 = (toco36 - calcInicial)/100;
+      var calcTruco42 = (Truco42 - calcInicial)/100;
+      var calcAlongado50 = (alongado50 - calcInicial)/100;
+      var calcCarreta72 = (carreta72 - calcInicial)/100;
+      var calcCarreta74 = (carreta74 - calcInicial)/100;
+      var calcCarreta76 = (carreta76 - calcInicial)/100;
+
+      //calculo dos recipientes
+      var calcConteiner = num1* cofre;
+      var calcCofre = num2* conteiner;
+      var calcPalete = num3* palete;
+      var calcPaleteChamex = num4* paleteChamex;
+
+      totalConteiner.textContent = (calcConteiner)/100
+ ;     totalCofre.textContent = (calcCofre)/100
+  ;    totalPalete.textContent = (calcPalete)/100;
+
+  totalPaleteChamex.textContent = (calcPaleteChamex)/100; 
+  if(calcEstendido24>=0){
+      resultadoestendido24.textContent = eval(calcEstendido24);
+      total.textContent = eval(calcInicial/100);
+      duvidaEstendido24.textContent = "Pode"
+      document.getElementById("podeEstendido24").style.background = "green";
+    }
+    else{
+      resultadoestendido24.textContent = eval(calcEstendido24);
+      total.textContent = eval(calcInicial/100);
+      duvidaEstendido24.textContent = "Não pode"
+      document.getElementById("podeEstendido24").style.background = "red";
+    }
+
+    if(calcEstandido26>=0){
+        resultadoestendido26.textContent = eval(calcEstandido26);
+        duvidaEstendido26.textContent = "Pode"
+        document.getElementById("podeEstendido26").style.background = "green";
+    }
+    else{
+        resultadoestendido26.textContent = eval(calcEstandido26);
+        duvidaEstendido26.textContent = "Não pode"
+        document.getElementById("podeEstendido26").style.background = "red";
+    }
+
+    if(calcToco36>=0){
+        resultadotoco36.textContent = eval(calcToco36);
+        duvidaToco36.textContent = "Pode"
+        document.getElementById("podeToco36").style.background = "green";
+    }
+    else{
+        resultadotoco36.textContent = eval(calcToco36);
+        duvidaToco36.textContent = "Não pode"
+        document.getElementById("podeToco36").style.background = "red";
+    }
+    if(calcTruco42>=0){
+        resultadoTruco42.textContent = eval(calcTruco42);
+        duvidaTruco42.textContent = "Pode"
+        document.getElementById("podeTruco42").style.background = "green";
+    }
+    else{
+        resultadoTruco42.textContent = eval(calcTruco42);
+        duvidaTruco42.textContent = "Não pode"
+        document.getElementById("podeTruco42").style.background = "red";
+    }
+
+    if(calcAlongado50>=0){
+        resultadoalongado50.textContent = eval(calcAlongado50);
+        duvidaAlongado50.textContent = "Pode"
+        document.getElementById("podeAlongado50").style.background = "green";
+    }
+    else{
+        resultadoalongado50.textContent = eval(calcAlongado50);
+        duvidaAlongado50.textContent = "Não pode"
+        document.getElementById("podeAlongado50").style.background = "red";
+    }
+
+    if(calcCarreta72>=0){
+        resultadocarreta72.textContent = eval(calcCarreta72);
+        duvidaCarreta72.textContent = "Pode"
+        document.getElementById("podeCarreta72").style.background = "green";
+    }
+    else{
+        resultadocarreta72.textContent = eval(calcCarreta72);
+        duvidaCarreta72.textContent = "Não pode"
+        document.getElementById("podeCarreta72").style.background = "red";
+
+    }
+    if(calcCarreta74>=0){
+        resultadocarreta74.textContent = eval(calcCarreta74);
+        duvidaCarreta74.textContent = "Pode"
+        document.getElementById("podeCarreta74").style.background = "green";
+    }
+    else{
+        resultadocarreta74.textContent = eval(calcCarreta74);
+        duvidaCarreta74.textContent = "Não pode"
+        document.getElementById("podeCarreta74").style.background = "red";
+    }
+    if(calcCarreta76>=0){
+        resultadocarreta76.textContent = eval(calcCarreta76);
+        duvidaCarreta76.textContent = "Pode"
+        document.getElementById("podeCarreta76").style.background = "green";
+    }
+    else{
+        resultadocarreta76.textContent = eval(calcCarreta76);
+        duvidaCarreta76.textContent = "Não pode"
+        document.getElementById("podeCarreta76").style.background = "red";
+    }
+    }
+  function clean4()
+  {
+      document.getElementById('campo4').value = 0;
+      var num1 = toNumber(campo1.value);
+      var num2 = toNumber(campo2.value);
+      var num3 = toNumber(campo3.value);
+      var num4 = toNumber(campo4.value);
+      var calcInicial = num1 * cofre + num2 * conteiner + num3 * palete + num4 * paleteChamex;
+
+      // calculos das diferenças
+      var calcEstendido24 = (estendido24 - calcInicial)/100;
+      var calcEstandido26 = (estendido26 - calcInicial)/100;
+      var calcToco36 = (toco36 - calcInicial)/100;
+      var calcTruco42 = (Truco42 - calcInicial)/100;
+      var calcAlongado50 = (alongado50 - calcInicial)/100;
+      var calcCarreta72 = (carreta72 - calcInicial)/100;
+      var calcCarreta74 = (carreta74 - calcInicial)/100;
+      var calcCarreta76 = (carreta76 - calcInicial)/100;
+
+      //calculo dos recipientes
+      var calcConteiner = num1* cofre;
+      var calcCofre = num2* conteiner;
+      var calcPalete = num3* palete;
+      var calcPaleteChamex = num4* paleteChamex;
+
+      totalConteiner.textContent = (calcConteiner)/100
+ ;     totalCofre.textContent = (calcCofre)/100
+  ;    totalPalete.textContent = (calcPalete)/100;
+
+  totalPaleteChamex.textContent = (calcPaleteChamex)/100; 
+  if(calcEstendido24>=0){
+      resultadoestendido24.textContent = eval(calcEstendido24);
+      total.textContent = eval(calcInicial/100);
+      duvidaEstendido24.textContent = "Pode"
+      document.getElementById("podeEstendido24").style.background = "green";
+    }
+    else{
+      resultadoestendido24.textContent = eval(calcEstendido24);
+      total.textContent = eval(calcInicial/100);
+      duvidaEstendido24.textContent = "Não pode"
+      document.getElementById("podeEstendido24").style.background = "red";
+    }
+
+    if(calcEstandido26>=0){
+        resultadoestendido26.textContent = eval(calcEstandido26);
+        duvidaEstendido26.textContent = "Pode"
+        document.getElementById("podeEstendido26").style.background = "green";
+    }
+    else{
+        resultadoestendido26.textContent = eval(calcEstandido26);
+        duvidaEstendido26.textContent = "Não pode"
+        document.getElementById("podeEstendido26").style.background = "red";
+    }
+
+    if(calcToco36>=0){
+        resultadotoco36.textContent = eval(calcToco36);
+        duvidaToco36.textContent = "Pode"
+        document.getElementById("podeToco36").style.background = "green";
+    }
+    else{
+        resultadotoco36.textContent = eval(calcToco36);
+        duvidaToco36.textContent = "Não pode"
+        document.getElementById("podeToco36").style.background = "red";
+    }
+    if(calcTruco42>=0){
+        resultadoTruco42.textContent = eval(calcTruco42);
+        duvidaTruco42.textContent = "Pode"
+        document.getElementById("podeTruco42").style.background = "green";
+    }
+    else{
+        resultadoTruco42.textContent = eval(calcTruco42);
+        duvidaTruco42.textContent = "Não pode"
+        document.getElementById("podeTruco42").style.background = "red";
+    }
+
+    if(calcAlongado50>=0){
+        resultadoalongado50.textContent = eval(calcAlongado50);
+        duvidaAlongado50.textContent = "Pode"
+        document.getElementById("podeAlongado50").style.background = "green";
+    }
+    else{
+        resultadoalongado50.textContent = eval(calcAlongado50);
+        duvidaAlongado50.textContent = "Não pode"
+        document.getElementById("podeAlongado50").style.background = "red";
+    }
+
+    if(calcCarreta72>=0){
+        resultadocarreta72.textContent = eval(calcCarreta72);
+        duvidaCarreta72.textContent = "Pode"
+        document.getElementById("podeCarreta72").style.background = "green";
+    }
+    else{
+        resultadocarreta72.textContent = eval(calcCarreta72);
+        duvidaCarreta72.textContent = "Não pode"
+        document.getElementById("podeCarreta72").style.background = "red";
+
+    }
+    if(calcCarreta74>=0){
+        resultadocarreta74.textContent = eval(calcCarreta74);
+        duvidaCarreta74.textContent = "Pode"
+        document.getElementById("podeCarreta74").style.background = "green";
+    }
+    else{
+        resultadocarreta74.textContent = eval(calcCarreta74);
+        duvidaCarreta74.textContent = "Não pode"
+        document.getElementById("podeCarreta74").style.background = "red";
+    }
+    if(calcCarreta76>=0){
+        resultadocarreta76.textContent = eval(calcCarreta76);
+        duvidaCarreta76.textContent = "Pode"
+        document.getElementById("podeCarreta76").style.background = "green";
+    }
+    else{
+        resultadocarreta76.textContent = eval(calcCarreta76);
+        duvidaCarreta76.textContent = "Não pode"
+        document.getElementById("podeCarreta76").style.background = "red";
+    }
+    }
+
+  campo1.addEventListener("input", somenteNumeros);
+  campo2.addEventListener("input", somenteNumeros);
+  campo3.addEventListener("input", somenteNumeros);
+  campo4.addEventListener("input", somenteNumeros);
+
+  campo1.addEventListener("input", onInput);
+  campo2.addEventListener("input", onInput);
+  campo3.addEventListener("input", onInput);
+  campo4.addEventListener("input", onInput);
+  operador.addEventListener("input", onInput);
+
+  onInput();
+</script>
+
+  <div class="botaoVoltar">
+    <a class="voltaTeste" href="index.html" target="_self" method="GET">voltar</a>
+  </div>
+
+  <div>
+    <footer class="footerBaixo">
+    </footer>
+  </div>
+  
+</html>
